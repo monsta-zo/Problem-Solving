@@ -1,23 +1,13 @@
 function solution(a, b) {
-    let i = 2;
-    while(i<=b){
-        if(b%i===0){
-            if(i===2 || i===5){
-                b/=i;
-            }
-            else{
-                if(a%i===0){
-                    a/=i;
-                    b/=i;
-                }
-                else{
-                    return 2;
-                }
-            }
-        }
-        else{
-            i++;
-        }
+    let gcd = 1;
+    for(let i=1; i<=Math.min(a,b); i++){
+        if(a%i===0 && b%i===0) gcd=i;
     }
-    return 1;
+    
+    b/=gcd;
+    
+    while(b%2===0) b/=2;
+    while(b%5===0) b/=5;
+    
+    return b===1?1:2;
 }
