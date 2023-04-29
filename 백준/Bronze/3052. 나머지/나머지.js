@@ -1,12 +1,10 @@
-let fs = require('fs');
+let fs = require('fs')
+let input = fs.readFileSync('dev/stdin').toString().trim().split('\n')
 
-let input = fs.readFileSync('dev/stdin').toString().split('\n');
+input = input.map(el => Number(el))
 
-let data = input.map(Number);
-let mySet = new Set();
+input = input.map(el => el%42)
 
-for(let i=0; i<10; i++){
-  mySet.add(data[i]%42);
-}
+input = [...new Set(input)]
 
-console.log(mySet.size);
+console.log(input.length)
