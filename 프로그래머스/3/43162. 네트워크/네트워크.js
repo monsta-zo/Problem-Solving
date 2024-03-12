@@ -1,22 +1,23 @@
-// 연결된 그래프의 개수가 총 몇개 인지 구하는 문제
-
-function solution(n, computers) {
-    let answer = 0;
-    let visited = Array(n).fill(false);
+function dfs(computer,visited,computers, n){
+    visited[computer] = true;
     
-    const dfs = (cur) => {
-        visited[cur] = true;
-        
-        for(let i=0; i<n; i++){
-            if(!visited[i] && computers[cur][i]) dfs(i); 
+    for(let i=0; i<n; i++){
+        if(computers[computer][i] && !visited[i]){
+            dfs(i,visited,computers, n);
         }
     }
+}
+
+function solution(n, computers) {
+    const visited = Array.from({length: n}, ()=>false);
+    
+    let answer = 0;
     
     for(let i=0; i<n; i++){
         if(!visited[i]){
-            dfs(i);
+            dfs(i, visited,computers, n);
             answer++;
-        } 
+        }
     }
     
     return answer;
