@@ -1,19 +1,17 @@
-
-
 function solution(numbers, target) {
     let answer = 0;
     
-    const dfs = (i,cur) => {
-        if(i===numbers.length){
-            if(cur===target) answer++;
+    const bt = (cur,sum) => {
+        if(cur === numbers.length-1){
+            if(sum === target) answer++;
             return;
         }
-        dfs(i+1, cur-numbers[i]);
-        dfs(i+1, cur+numbers[i]);
         
+        bt(cur+1, sum+numbers[cur+1])
+        bt(cur+1, sum-numbers[cur+1])
     }
     
-    dfs(0,0);
+    bt(-1, 0);
     
     return answer;
 }
